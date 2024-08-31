@@ -1,29 +1,36 @@
-NAME = a.out
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nsakanou <nsakanou@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/08/31 16:24:39 by nsakanou          #+#    #+#              #
+#    Updated: 2024/08/31 16:36:10 by nsakanou         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CXX = g++
+NAME = megaphone
+
+CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-CXXFLAGS += -g -fsanitize=address
+CXXFLAGS += -MMD -MP
 RM = rm -rf
 
 
-FILES = main Fixed
-SRC = $(FILES:=.cpp)
+SRCS = megaphone.cpp
+OBJDIR	= obj
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
+DEPENDS	= $(OBJS:.o=.d)
 
-FILES_S = Fixed
-HEADER = $(FILES_S:=.hpp)
-
-OBJDIR = objzs
-OBJ = $(addprefix $(OBJDIR)/, $(FILES:=.o))
-
-
-LEAK = valgrind --tool=memcheck
-
-$(NAME): $(OBJ) $(HEADER)
-	$(CXX) $(CXXFLAGS) $(OBJ) -o $@
 
 all: $(NAME)
 
-$(OBJDIR)/%.o: %.cpp $(HEADER)
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
+
+
+$(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	
@@ -35,13 +42,4 @@ fclean: clean
 
 re: fclean all
 
-echo:
-	echo $(FILES) $(SRC) $(OBJ) $(HEADER)
-
-test:
-	@./$(NAME)
-
-leak:
-	$(LEAK) ./$(NAME)
-
-.PHONY: all clean fclean re leak bonus
+.PHONY: all clean fclean re
