@@ -6,7 +6,7 @@
 #    By: nsakanou <nsakanou@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/31 17:05:53 by nsakanou          #+#    #+#              #
-#    Updated: 2024/09/01 10:41:38 by nsakanou         ###   ########.fr        #
+#    Updated: 2024/09/01 21:26:17 by nsakanou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CXXFLAGS += -MMD -MP
 RM = rm -rf
 
 SRCDIR = srcs
-SRC =  main.cpp \
+SRC =   main.cpp \
 		Contact.cpp \
 		PhoneBook.cpp
 

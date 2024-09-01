@@ -6,7 +6,7 @@
 /*   By: nsakanou <nsakanou@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:42:42 by nsakanou          #+#    #+#             */
-/*   Updated: 2024/09/01 18:21:11 by nsakanou         ###   ########.fr       */
+/*   Updated: 2024/09/01 21:44:08 by nsakanou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ using std::cout;
 using std::endl;
 using std::setw;
 
-string	getInputString(const std::string &prompt) {
+string	PhoneBook::getInputString(const std::string &prompt) {
 	string	input;
 	
 	while (1) {
@@ -31,7 +31,7 @@ string	getInputString(const std::string &prompt) {
 			cout << "Error: Input empty. Please enter again.\n";
 			continue;
 		}
-		break;
+		break ;
 	}
 	return input;
 }
@@ -72,6 +72,8 @@ void	PhoneBook::searchContact() const {
 	if (std::cin.fail() || index < 1 || index > static_cast<int>(contacts.size())) {
 		cout << "Error: Invalid index.\n";
 		std::cin.clear();//入力エラーをクリア
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 改行を取り除く
+		cout << "Error: Invalid command. Please try again.\n";
 		return ;
 	}
 	//インデックスが有効な場合、連絡先の詳細を表示
@@ -93,10 +95,10 @@ void	PhoneBook::displayContacts() const {
 	i = 0;
 	while (i < contacts.size()) {
 		i++;
-		cout << setw(10) << i + 1 << "|"
-			 << setw(10) << truncateString(contacts[i].getFirstName()) << "|"
-			 << setw(10) << truncateString(contacts[i].getLastName()) << "|"
-			 << setw(10) << truncateString(contacts[i].getNickname()) << endl;
+		cout << setw(10) << i << "|"
+			 << setw(10) << truncateString(contacts[i - 1].getFirstName()) << "|"
+			 << setw(10) << truncateString(contacts[i - 1].getLastName()) << "|"
+			 << setw(10) << truncateString(contacts[i - 1].getNickname()) << endl;
 	}
 }
 

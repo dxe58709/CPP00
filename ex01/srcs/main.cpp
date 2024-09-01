@@ -6,7 +6,7 @@
 /*   By: nsakanou <nsakanou@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 17:20:16 by nsakanou          #+#    #+#             */
-/*   Updated: 2024/09/01 18:10:41 by nsakanou         ###   ########.fr       */
+/*   Updated: 2024/09/01 21:47:53 by nsakanou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ int main(){
 	while (true) {
 		std::cout << "Enter command (ADD, SEARCH, EXIT): ";
 		std::getline(std::cin, command);
+		if (std::cin.eof()) {
+			break ;
+		}
 		if (command == "ADD") {
 			PhoneBook.addContact();
 		} else if (command == "SEARCH") {
 			PhoneBook.searchContact();
 		} else if (command == "EXIT") {
-			break;
+			std::cout << "EXIT" << std::endl;
+			break ;
 		} else {
 			std::cout << "Error: Invalid command. Please try again.\n";
 		}
