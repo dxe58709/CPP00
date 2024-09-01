@@ -6,7 +6,7 @@
 /*   By: nsakanou <nsakanou@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:42:37 by nsakanou          #+#    #+#             */
-/*   Updated: 2024/09/01 21:32:22 by nsakanou         ###   ########.fr       */
+/*   Updated: 2024/09/02 00:05:00 by nsakanou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@
 class PhoneBook
 {
 	private:
-		std::vector<Contact> contacts;
+		static const int MAX_CONTACTS = 8;
+		Contact contacts[MAX_CONTACTS];
+		unsigned int	ContactCount;
 		std::string getInputString(const std::string &prompt);
 		static std::string truncateString(const std::string &str);
 
 	public:
-	void	addContact();
-	void	searchContact() const;
-	void	displayContacts() const;
+		PhoneBook();
+		void	addContact();
+		void	searchContact() const;
+		void	displayContacts() const;
 };
 
 #endif

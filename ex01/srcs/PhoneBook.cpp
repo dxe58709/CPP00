@@ -6,7 +6,7 @@
 /*   By: nsakanou <nsakanou@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:42:42 by nsakanou          #+#    #+#             */
-/*   Updated: 2024/09/01 21:44:08 by nsakanou         ###   ########.fr       */
+/*   Updated: 2024/09/02 00:06:14 by nsakanou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,20 @@ using std::cout;
 using std::endl;
 using std::setw;
 
+PhoneBook::PhoneBook() : ContactCount(0) {}
+
 string	PhoneBook::getInputString(const std::string &prompt) {
 	string	input;
 	
-	while (1) {
+	while (true) {
 		cout << prompt;
 		getline(std::cin, input);//Enterキー押すまでの入力全体を文字列としてinputに格納
 		if (std::cin.eof()) {
 			cout << "Error: End of Input detected.\n";
+			exit (1);
+		}
+		if (std::cin.fail()) {
+			cout << "Error: Failed to input\n";
 			exit (1);
 		}
 		if (input.empty()) {
@@ -40,8 +46,13 @@ void	PhoneBook::addContact() {
 	Contact	newContact;
 	string	input;
 
-	if (contacts.size() >= 8) {
-		contacts.erase(contacts.begin());//contactsの一番最初の要素(一番古い連絡先)を削除
+	if (ContactCount >= MAX_CONTACTS) {
+		unsigned int	i = 1;
+		while (i < MAX_CONTACTS) {
+			i++;
+			contacts[i - 1] = contacts[i];
+		}
+		--ContactCount;
 	}
 
 	input = getInputString("First Name: ");
@@ -55,45 +66,45 @@ void	PhoneBook::addContact() {
 	input = getInputString("Darkest Secret: ");
 	newContact.setDarkestSecret(input);
 
-	contacts.push_back(newContact);
+	contacts[ContactCount++] = newContact;
 	cout << "Contact added successfully.\n";
 }
 
 void	PhoneBook::searchContact() const {
-	if (contacts.empty()) {
+	if (ContactCount == 0) {
 		cout << "Error: PhoneBook is empty.\n";
 		return ;
 	}
 	displayContacts();
-	//ユーザーに表示したい連絡先のインデックスを入力させる
+	//ユーザーに表示したい連絡先の 表番号を入力させる
 	cout << "Enter the index of the contact to view details: ";
-	int	index;
-	std::cin >> index;//ユーザーが入力した番号が入る
-	if (std::cin.fail() || index < 1 || index > static_cast<int>(contacts.size())) {
+	unsigned int	i;
+	std::cin >> i;//ユーザーが入力した番号が入る
+	if (std::cin.fail() || i < 1 || i > ContactCount) {
 		cout << "Error: Invalid index.\n";
-		std::cin.clear();//入力エラーをクリア
+		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // 改行を取り除く
-		cout << "Error: Invalid command. Please try again.\n";
 		return ;
 	}
 	//インデックスが有効な場合、連絡先の詳細を表示
-	const Contact &contact = contacts[index - 1];
+	const Contact &contact = contacts[i - 1];
     cout << "First Name: " << contact.getFirstName() << endl;
     cout << "Last Name: " << contact.getLastName() << endl;
     cout << "Nickname: " << contact.getNickname() << endl;
     cout << "Phone Number: " << contact.getPhoneNumber() << endl;
     cout << "Darkest Secret: " << contact.getDarkestSecret() << endl;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');// 改行を取り除く
 }
 
 void	PhoneBook::displayContacts() const {
-	size_t	i;
+	unsigned int	i;
 
 	cout << setw(10) << "Index" << "|"
 		 << setw(10) << "First Name" << "|"
 		 << setw(10) << "Last Name" << "|"
 		 << setw(10) << "Nickname" << endl;
 	i = 0;
-	while (i < contacts.size()) {
+	while (i < ContactCount) {
 		i++;
 		cout << setw(10) << i << "|"
 			 << setw(10) << truncateString(contacts[i - 1].getFirstName()) << "|"
