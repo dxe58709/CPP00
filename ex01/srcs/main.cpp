@@ -6,12 +6,10 @@
 /*   By: nsakanou <nsakanou@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 17:20:16 by nsakanou          #+#    #+#             */
-/*   Updated: 2024/09/01 23:34:35 by nsakanou         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:25:28 by nsakanou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 

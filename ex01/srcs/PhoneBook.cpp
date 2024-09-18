@@ -6,7 +6,7 @@
 /*   By: nsakanou <nsakanou@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 10:42:42 by nsakanou          #+#    #+#             */
-/*   Updated: 2024/09/02 00:06:14 by nsakanou         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:28:29 by nsakanou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	PhoneBook::searchContact() const {
 		return ;
 	}
 	displayContacts();
-	//ユーザーに表示したい連絡先の 表番号を入力させる
 	cout << "Enter the index of the contact to view details: ";
 	unsigned int	i;
 	std::cin >> i;//ユーザーが入力した番号が入る
@@ -88,11 +87,11 @@ void	PhoneBook::searchContact() const {
 	}
 	//インデックスが有効な場合、連絡先の詳細を表示
 	const Contact &contact = contacts[i - 1];
-    cout << "First Name: " << contact.getFirstName() << endl;
-    cout << "Last Name: " << contact.getLastName() << endl;
-    cout << "Nickname: " << contact.getNickname() << endl;
-    cout << "Phone Number: " << contact.getPhoneNumber() << endl;
-    cout << "Darkest Secret: " << contact.getDarkestSecret() << endl;
+	cout << "First Name: " << contact.getFirstName() << endl;
+	cout << "Last Name: " << contact.getLastName() << endl;
+	cout << "Nickname: " << contact.getNickname() << endl;
+	cout << "Phone Number: " << contact.getPhoneNumber() << endl;
+	cout << "Darkest Secret: " << contact.getDarkestSecret() << endl;
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');// 改行を取り除く
 }
 
