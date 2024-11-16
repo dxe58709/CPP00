@@ -6,7 +6,7 @@
 /*   By: nsakanou <nsakanou@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 19:56:48 by nsakanou          #+#    #+#             */
-/*   Updated: 2024/09/01 18:11:02 by nsakanou         ###   ########.fr       */
+/*   Updated: 2024/11/16 13:53:04 by nsakanou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,52 @@
 
 using std::string;
 
+Contact::Contact()
+{
+}
+
+Contact::~Contact()
+{
+}
+
 //getName
 string Contact::getFirstName() const{
-	return firstName;
+	return (this->firstName);
 }
 
 string Contact::getLastName() const{
-	return lastName;
+	return (this->lastName);
 }
 
 string Contact::getNickname() const{
-	return nickname;
+	return (this->nickname);
 }
 
 string Contact::getPhoneNumber() const{
-	return phoneNumber;
+	return (this->phoneNumber);
 }
 
 string Contact::getDarkestSecret() const{
-	return darkestSecret;
+	return (this->darkestSecret);
 }
 
 //setName
-void	Contact::setFirstName(const std::string &newFirstName){
-	firstName = newFirstName;
+void	Contact::setFirstName(std::string newFirstName){
+	this->firstName = newFirstName;
 }
 
-void	Contact::setLastName(const std::string &newLastName){
-	lastName = newLastName;
+void	Contact::setLastName(std::string newLastName){
+	this->lastName = newLastName;
 }
 
-void	Contact::setNickname(const std::string &newNickname){
-	nickname = newNickname;
+void	Contact::setNickname(std::string newNickname){
+	this->nickname = newNickname;
 }
 
-void	Contact::setPhoneNumber(const std::string &newPhoneNumber){
-	phoneNumber = newPhoneNumber;
+void	Contact::setPhoneNumber(std::string newPhoneNumber){
+	this->phoneNumber = newPhoneNumber;
 }
 
-void	Contact::setDarkestSecret(const std::string &newDarkestSecret){
-	darkestSecret = newDarkestSecret;
+void	Contact::setDarkestSecret(std::string newDarkestSecret){
+	this->darkestSecret = newDarkestSecret;
 }
